@@ -122,7 +122,7 @@ public class CreateChannel extends Thread{
 
     private int getRemotePort(Object con){
         String co = String.valueOf(con);
-        if (co == null || co.length()==0){
+        if (co == null || co.equals("null") || co.length()==0){
             co = "(30000,60000)";
         }
         String range = co.replace(" ", "");

@@ -2,14 +2,15 @@ package top.liy233.mcm.quickonlinemode;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.liy233.mcm.quickonlinemode.commands.Command;
 import top.liy233.mcm.quickonlinemode.config.ConfigManager;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 
 public class Main implements ModInitializer {
@@ -19,6 +20,7 @@ public class Main implements ModInitializer {
 	public static final File CONFIG_FILE = ROOT_PATH.resolve("config.json").toFile();
 	public static final File FRPC_FILE = ROOT_PATH.resolve("frpc.exe").toFile();
 	public static int SERVER_PORT = 0;
+	public static boolean TIP_PLAYER = false;
 	public static String TOKEN = "";
 
 
@@ -29,11 +31,12 @@ public class Main implements ModInitializer {
 			ConfigManager.checkConfig();
 			ConfigManager.parseData();
 
-			ServerEntityEvents.ENTITY_LOAD.register((PlayerEvent::join));
+			ServerEntityEvents.ENTITY_LOAD.register((Events::join));
+			ServerLifecycleEvents.SERVER_STOPPED.register((Events::stoped));
 
 			Command.regCmd();
 
-		} catch (Exception e){
+		} catch (IOException e){
 			e.printStackTrace();
 		}
 

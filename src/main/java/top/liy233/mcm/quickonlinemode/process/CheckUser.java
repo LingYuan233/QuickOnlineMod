@@ -45,6 +45,19 @@ public class CheckUser extends Thread {
                 send("登陆失败，请报告此错误");
                 return;
             }
+            // 删除其他以QOM_开头的隧道
+            HttpURLConnection rmQOMChannel = HttpRequestUtil.sendWithToken("POST", URLs.GET_USER_CHANNELS, null);
+            GetUserChannelsResultData rmQOMChannelD = HttpRequestUtil.parse(rmQOMChannel, GetUserChannelsResultData.class);
+            for (GetUserChannelsResultData.Data.Channel channel : rmQOMChannelD.getData().getList()){
+                if (channel.getProxyName().startsWith("QOM_")){
+                    //删除此隧道
+                    DeleteChannelRequestData data = new DeleteChannelRequestData(channel.getId());
+                    Main.LOGGER.info("删除隧道：{}，ID：{}", channel.getProxyName(), channel.getId());
+                    HttpURLConnection c = HttpRequestUtil.sendWithToken("POST", URLs.DELETE_CHANNEL, gson.toJson(data));
+                    DeleteChannelResultData d = HttpRequestUtil.parse(c, DeleteChannelResultData.class);
+                    Main.LOGGER.info(gson.toJson(d));
+                }
+            }
 
             send("登陆成功，正在获取隧道信息");
             //

@@ -1,6 +1,7 @@
 package top.liy233.mcm.quickonlinemode.utils;
 
 import com.google.gson.Gson;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import top.liy233.mcm.quickonlinemode.Main;
 import top.liy233.mcm.quickonlinemode.process.URLs;
 import top.liy233.mcm.quickonlinemode.utils.data.GetCodeResultData;
