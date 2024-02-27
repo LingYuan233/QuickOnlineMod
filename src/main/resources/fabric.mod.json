@@ -10,12 +10,12 @@
   ],
 
   "license": "GPL 2.0",
-  "icon": "assets/quickonlinemod/icon.png",
+  "icon": "assets/quickonlinemod/qom_icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "top.liy233.mcm.quickonlinemode.Main"
+      "top.liy233.mcm.quickonlinemod.Main"
     ]
   },
   "mixins": [
