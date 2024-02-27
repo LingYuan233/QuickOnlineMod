@@ -32,15 +32,17 @@ public class Command {
         // TODO: 创建 /quickonlinemod help
         // 打开帮助网页
 
+        CommandRegistrationCallback.EVENT.register(((dispatcher, dedicated) -> {
+            dispatcher.register(literal("_qom").then(argument("cid", IntegerArgumentType.integer())
+                    .executes(context -> startChannel(context))));
+        }));
+
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
             dispatcher.register(
                     literal("quickonlinemod").requires(s -> s.hasPermissionLevel(2))
                             .then(literal("reset").executes(context -> resetConfig()))
                             .then(literal("start").executes(context -> start(context)))
                             .then(literal("help").executes(context ->  help(context)))
-                            .then(literal("start_channel")
-                                            .then(argument("cid", IntegerArgumentType.integer()).executes(context -> startChannel(context)))
-                            )
             );
         });
     }

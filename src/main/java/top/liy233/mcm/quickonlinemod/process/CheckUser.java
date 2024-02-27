@@ -117,6 +117,6 @@ public class CheckUser extends Thread {
     }
 
     private static final String TEMPLATE = """
-            /tellraw @p {"text": "%s","color": "blue","hoverEvent": {"action":"show_text","contents":"点击此处在此创建联机隧道(%s号)"},"clickEvent":{"action":"run_command","value":"/quickonlinemod start_channel %d"}}
+            /tellraw @p {"text": "%s","color": "blue","hoverEvent": {"action":"show_text","contents":"点击此处在此创建联机隧道(%s号)"},"clickEvent":{"action":"run_command","value":"/_qom %d"}}
             """;
 }
