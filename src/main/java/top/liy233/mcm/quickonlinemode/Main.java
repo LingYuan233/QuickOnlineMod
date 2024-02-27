@@ -1,6 +1,7 @@
 package top.liy233.mcm.quickonlinemode;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import org.slf4j.Logger;
@@ -27,6 +28,8 @@ public class Main implements ModInitializer {
 		try {
 			ConfigManager.checkConfig();
 			ConfigManager.parseData();
+
+			ServerEntityEvents.ENTITY_LOAD.register((PlayerEvent::join));
 
 			Command.regCmd();
 

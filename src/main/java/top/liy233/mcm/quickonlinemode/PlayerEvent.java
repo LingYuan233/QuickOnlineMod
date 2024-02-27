@@ -14,6 +14,7 @@ public class PlayerEvent {
         if (entity.isPlayer()){
             PlayerEntity player = (PlayerEntity) entity;
             player.sendMessage(Text.of("[QOM] 此模组基于OpenFRP的OPEN API"), false);
+            player.sendMessage(Text.of("[QOM] 使用/quickonlinemod start进行联机"), false);
         }
         return ActionResult.PASS;
     }

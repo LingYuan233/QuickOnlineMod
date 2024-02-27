@@ -15,7 +15,11 @@ public class ConfigManager {
         if (cfg.length() == 0){
             FileUtil.writeFile(Main.CONFIG_FILE, SAMPLE_CONFIG);
         }
-        config = gson.fromJson(cfg, ConfigData.class);
+        ConfigData data = gson.fromJson(cfg, ConfigData.class);
+        if (isNOL(data.getUser()) || isNOL(data.getKey()) || isNOL(data.getPassword())){
+            throw new RuntimeException("[QOM] 请检查配置文件");
+        }
+        config = data;
     }
 
     public static void checkConfig() throws IOException {
@@ -48,15 +52,19 @@ public class ConfigManager {
         }
     }
 
+    private static boolean isNOL(String s){
+        return (s == null || s.length() == 0);
+    }
+
     public static void resetConfigFile(){
         FileUtil.writeFile(Main.CONFIG_FILE, SAMPLE_CONFIG);
     }
 
     private static final String SAMPLE_CONFIG = """
             {
-                "user": "你的用户名",
-                "password": "密码",
-                "key": "用户密钥"
+                "user": "",
+                "password": "",
+                "key": ""
             }
             """;
 
