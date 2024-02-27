@@ -18,15 +18,5 @@ public class PlayerEvent {
         return ActionResult.PASS;
     }
 
-    public static ActionResult quit(Entity entity, ServerWorld world) {
-        if (entity.isPlayer()){
-            try {
-                PlayerEntity player = (PlayerEntity) entity;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return ActionResult.PASS;
-    }
 
 }
