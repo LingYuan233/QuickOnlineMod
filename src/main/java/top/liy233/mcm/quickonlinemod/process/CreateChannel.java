@@ -97,12 +97,12 @@ public class CreateChannel extends Thread{
 
 
         } catch (IOException e) {
-            player.sendMessage(Text.of("创建失败，请重试"), false);
+            player.sendMessage(Text.of("创建失败，请重试（QOM_E6）"), false);
             e.printStackTrace();
         } catch (RemotePortException e) {
-            player.sendMessage(Text.of(e.getMessage()) ,false);
+            player.sendMessage(Text.of("远程端口不可用，请重试（QOM_E4）："+e.getMessage()) ,false);
         } catch (NullPointerException e){
-            send("发生错误，请检查网络环境后重试");
+            send("发生错误（QOM_E5）");
         }
     }
 

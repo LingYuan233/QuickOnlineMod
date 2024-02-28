@@ -41,7 +41,7 @@ public class CheckUser extends Thread {
             boolean status = HttpRequestUtil.login(new LoginRequestData(config.getUser(), config.getPassword()));
 
             if (! status){
-                send("登陆失败，请报告此错误");
+                send("登陆失败，请报告此错误（QOM_E1）");
                 return;
             }
             // 删除其他以QOM_开头的隧道
@@ -68,7 +68,7 @@ public class CheckUser extends Thread {
             getUserInfo.disconnect();
 
             if (maxChannels <= usedChannels){
-                send("没有隧道余额");
+                send("没有隧道余额（QOM_E2）");
                 return;
             }
 
@@ -107,7 +107,7 @@ public class CheckUser extends Thread {
 
 
         } catch (Exception e){
-            player.sendMessage(Text.of("登陆失败："+e.getMessage()), true);
+            player.sendMessage(Text.of("出现错误：（QOM_E3）"), true);
             e.printStackTrace();
         }
     }
